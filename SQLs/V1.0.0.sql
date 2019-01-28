@@ -1,110 +1,186 @@
-CREATE TABLE __migrationversions (
-  [VersionCode] varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL,
-  [Version] varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL,
-  [ctime] datetime2(7)  NULL,
-  CONSTRAINT [PK____migrat__8C291688BC1BA6BA] PRIMARY KEY CLUSTERED ([VersionCode])
-    WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
-)
-GO 
- 
 -- ----------------------------
 -- Table structure for auths_role_claims
 -- ----------------------------
-DROP TABLE IF EXISTS `auths_role_claims`;
-CREATE TABLE `auths_role_claims`  (
-  `Id` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `RoleId` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ClaimType` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ClaimValue` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`Id`) USING BTREE,
-  INDEX `IX_AspNetRoleClaims_RoleId`(`RoleId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
- 
+CREATE TABLE auths_role_claims (
+  [Id] nvarchar(255) NOT NULL,
+  [RoleId] nvarchar(255) NULL,
+  [ClaimType] nvarchar(1024) NULL,
+  [ClaimValue] nvarchar(1024) NULL
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetRoleClaims_RoleId]
+ON auths_role_claims (
+  [RoleId]
+)
+GO
+
+
 -- ----------------------------
 -- Table structure for auths_roles
 -- ----------------------------
-DROP TABLE IF EXISTS `auths_roles`;
-CREATE TABLE `auths_roles`  (
-  `Id` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Name` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `NormalizedName` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ConcurrencyStamp` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`Id`) USING BTREE,
-  UNIQUE INDEX `RoleNameIndex`(`NormalizedName`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE auths_roles (
+  [Id] nvarchar(255) NOT NULL,
+  [Name] nvarchar(255) NULL,
+  [NormalizedName] nvarchar(255) NOT NULL,
+  [ConcurrentStamp] nvarchar(1024) NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetRoles_RoleName]
+ON auths_roles (
+  [NormalizedName]
+)
+GO
  
-DROP TABLE IF EXISTS `auths_user_claims`;
-CREATE TABLE `auths_user_claims`  (
-  `Id` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `UserId` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ClaimType` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ClaimValue` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`Id`) USING BTREE,
-  INDEX `IX_AspNetUserClaims_UserId`(`UserId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for auths_user_claims
+-- ----------------------------
+CREATE TABLE auths_user_claims (
+  [Id] nvarchar(255) NOT NULL,
+  [UserId] nvarchar(255) NOT NULL,
+  [ClaimType] nvarchar(1024) NULL,
+  [ClaimValue] nvarchar(1024) NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserClaimss_UserId]
+ON auths_user_claims (
+  [UserId]
+)
+GO
  
-DROP TABLE IF EXISTS `auths_user_logins`;
-CREATE TABLE `auths_user_logins`  (
-  `Id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `LoginProvider` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ProviderKey` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ProviderDisplayName` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `UserId` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`Id`) USING BTREE,
-  INDEX `IX_AspNetUserLogins_UserId`(`UserId`) USING BTREE,
-  INDEX `IX_AspNetUserLogins_ProviderUserId`(`LoginProvider`, `UserId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for auths_user_logins
+-- ----------------------------
+CREATE TABLE auths_user_logins (
+  [Id] nvarchar(255) NOT NULL,
+  [LoginProvider] nvarchar(255) NOT NULL,
+  [ProviderKey] nvarchar(1024) NOT NULL,
+  [ProviderDisplayName] nvarchar(1024) NULL,
+  [UserId] nvarchar(255) NOT NULL,
+  PRIMARY KEY CLUSTERED ([Id]) 
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserLogins_UserId]
+ON auths_user_logins (
+  [UserId]
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserLogins_ProviderUserId]
+ON auths_user_logins (
+  [UserId],
+  [LoginProvider]
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserLogins_ProviderKey]
+ON auths_user_logins (
+  [LoginProvider],
+  [ProviderKey]
+)
+GO
  
+
 -- ----------------------------
 -- Table structure for auths_user_roles
 -- ----------------------------
-DROP TABLE IF EXISTS `auths_user_roles`;
-CREATE TABLE `auths_user_roles`  (
-  `Id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `UserId` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `RoleId` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`Id`) USING BTREE,
-  INDEX `IX_AspNetUserRoles_RoleId`(`RoleId`) USING BTREE,
-  INDEX `IX_AspNetUserRoles_UserIdRoleId`(`UserId`, `RoleId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE auths_user_roles (
+  [Id] nvarchar(255) NOT NULL,
+  [UserId] nvarchar(255) NOT NULL,
+  [RoleId] nvarchar(255) NOT NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserRoles_RoleId]
+ON auths_user_roles (
+  [RoleId]
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserRoles_UserIdRoleId]
+ON auths_user_roles (
+  [UserId],
+  [RoleId]
+)
+GO
+
  
 -- ----------------------------
 -- Table structure for auths_user_tokens
 -- ----------------------------
-DROP TABLE IF EXISTS `auths_user_tokens`;
-CREATE TABLE `auths_user_tokens`  (
-  `Id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `UserId` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `LoginProvider` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Value` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`Id`) USING BTREE,
-  INDEX `IX_AspNetUserTokens`(`UserId`, `LoginProvider`, `Name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE auths_user_tokens (
+  [Id] nvarchar(255) NOT NULL,
+  [UserId] nvarchar(255) NOT NULL,
+  [LoginProvider] nvarchar(255) NOT NULL,
+  [Name] nvarchar(255) NOT NULL,
+  [Value] nvarchar(1024) NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUserTokens]
+ON auths_user_tokens (
+  [UserId],
+  [LoginProvider],
+  [Name]
+)
+GO
+
  
 -- ----------------------------
 -- Table structure for auths_users
 -- ----------------------------
-DROP TABLE IF EXISTS `auths_users`;
-CREATE TABLE `auths_users`  (
-  `Id` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `UserName` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `NormalizedUserName` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Email` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `NormalizedEmail` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EmailConfirmed` tinyint(4) NOT NULL,
-  `PasswordHash` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SecurityStamp` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ConcurrencyStamp` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PhoneNumber` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PhoneNumberConfirmed` tinyint(4) NOT NULL DEFAULT 0,
-  `TwoFactorEnabled` tinyint(4) NOT NULL,
-  `LockoutEnd` datetime(0) NULL DEFAULT NULL,
-  `LockoutEnabled` tinyint(4) NOT NULL DEFAULT 0,
-  `AccessFailedCount` tinyint(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`Id`) USING BTREE,
-  UNIQUE INDEX `UserNameIndex`(`NormalizedUserName`) USING BTREE,
-  INDEX `EmailIndex`(`NormalizedEmail`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
- 
-INSERT INTO `__migrationversions`(`VersionCode`, `Version`) VALUES ('20180809001', 'V1.0.0');
+CREATE TABLE auths_users (
+  [Id] nvarchar(255) NOT NULL,
+  [UserName] nvarchar(255) NULL,
+  [NormalizedUserName] nvarchar(255) NOT NULL,
+  [Email] nvarchar(255) NULL,
+  [NormalizedEmail] nvarchar(255) NULL,
+  [EmailConfirmed] tinyint DEFAULT 0 NOT NULL,
+  [PasswordHash] nvarchar(1024) NULL,
+  [SecurityStamp] nvarchar(1024) NULL,
+  [ConcurrencyStamp] nvarchar(1024) NULL,
+  [PhoneNumber] nvarchar(50) NULL,
+  [PhoneNumberConfirmed] tinyint DEFAULT 0 NOT NULL,
+  [TwoFactorEnabled] tinyint DEFAULT 0 NOT NULL,
+  [LockoutEnd] datetime2 NULL,
+  [LockoutEnabled] tinyint DEFAULT 0 NOT NULL,
+  [AccessFailedCount] tinyint DEFAULT 0 NOT NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_AspNetUser_Email]
+ON auths_users (
+  [NormalizedEmail]
+)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_AspNetUser_UserName]
+ON auths_users (
+  [NormalizedUserName]
+)
+GO
+
+
+-- ----------------------------
+-- Table structure for auths_users
+-- ----------------------------
+CREATE TABLE __migrationversions (
+  [VersionCode] varchar(255) NOT NULL,
+  [Version] varchar(255) NOT NULL,
+  [ctime] datetime2(7)  NULL,
+  PRIMARY KEY CLUSTERED ([VersionCode])
+)
+GO 
+
+INSERT INTO __migrationversions(VersionCode, [Version]) VALUES ('20190129001', 'V1.0.0');
