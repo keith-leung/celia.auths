@@ -1,0 +1,8 @@
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\bin\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.deps.json
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\bin\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.dll
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\obj\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.csproj.CoreCompileInputs.cache
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\obj\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.AssemblyInfoInputs.cache
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\obj\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.AssemblyInfo.cs
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\bin\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.pdb
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\obj\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.dll
+C:\Users\Keith\source\repos\celia.auths\Celia.io.Core.Auths.Abstractions\obj\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.pdb
