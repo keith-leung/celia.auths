@@ -81,11 +81,8 @@ ON auths_user_logins (
 )
 GO
 
-CREATE NONCLUSTERED INDEX [IX_AspNetUserLogins_ProviderKey]
-ON auths_user_logins (
-  [LoginProvider],
-  [ProviderKey]
-)
+CREATE UNIQUE INDEX IX_AspNetUserLogins_LoginProviderKey
+    on auths_user_logins (ProviderKey, LoginProvider)
 GO
  
 
@@ -171,9 +168,24 @@ ON auths_users (
 )
 GO
 
+ 
+-- ----------------------------
+-- Table structure for auths_service_apps
+-- ----------------------------
+create table auths_service_apps
+(
+ appid nvarchar(100) not null,
+ appsecret nvarchar(100) null,
+ lockoutenabled tinyint null,
+ accessfailedcount int null,
+ lockoutendtimestamp bigint null,
+	PRIMARY KEY CLUSTERED (appid)
+)
+GO
+ 
 
 -- ----------------------------
--- Table structure for auths_users
+-- Table structure for __migrationversions
 -- ----------------------------
 CREATE TABLE __migrationversions (
   [VersionCode] varchar(255) NOT NULL,
@@ -182,5 +194,6 @@ CREATE TABLE __migrationversions (
   PRIMARY KEY CLUSTERED ([VersionCode])
 )
 GO 
+
 
 INSERT INTO __migrationversions(VersionCode, [Version]) VALUES ('20190129001', 'V1.0.0');

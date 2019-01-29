@@ -1,9 +1,0 @@
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\bin\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.deps.json
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\bin\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.dll
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\obj\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.csprojAssemblyReference.cache
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\obj\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.csproj.CoreCompileInputs.cache
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\obj\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.AssemblyInfoInputs.cache
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\obj\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.AssemblyInfo.cs
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\bin\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.dll
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\bin\Debug\netstandard2.0\Celia.io.Core.Auths.Abstractions.pdb
-C:\Users\Keith\Source\Repos\celia.auths\Celia.io.Core.Auths.DataAccess\obj\Debug\netstandard2.0\Celia.io.Core.Auths.DataAccess.csproj.CopyComplete

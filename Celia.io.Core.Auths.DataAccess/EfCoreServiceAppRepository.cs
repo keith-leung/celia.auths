@@ -12,17 +12,16 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
         private readonly ApplicationDbContext _context = null;
         private readonly ILogger logger = null;
 
-        public EfCoreServiceAppRepository(ILogger<EfCoreRoleStore> logger, ApplicationDbContext context)
+        public EfCoreServiceAppRepository(ILogger<EfCoreServiceAppRepository> logger, 
+            ApplicationDbContext context)
         {
             this._context = context ?? throw new ArgumentNullException(
                 nameof(context));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        private List<ServiceApp> _serviceApps = new List<ServiceApp>();
+        } 
 
         /// <summary>
-        /// 通过内存缓存ServiceApp实现快速查询
+        /// 不能通过内存实现加速，加速使用缓存是Service层的事情
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="appSecret"></param>
@@ -30,19 +29,10 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
         public Task<ServiceApp> GetByAppIdAppSecretAsync(string appId, string appSecret)
         {
             return Task.Run<ServiceApp>(() =>
-            {
-                var serviceApp = _serviceApps.Find(m => m.AppId.Equals(
-                    appId, StringComparison.InvariantCultureIgnoreCase)
-                    && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase));
-                if (serviceApp == null)
-                {
-                    serviceApp = _context.ServiceApps.FirstOrDefault(m => m.AppId.Equals(
-                    appId, StringComparison.InvariantCultureIgnoreCase)
-                    && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase));
-
-                    if (serviceApp != null)
-                        _serviceApps.Add(serviceApp);
-                }
+            { 
+                var serviceApp = _context.ServiceApps.FirstOrDefault(m => m.AppId.Equals(
+                appId, StringComparison.InvariantCultureIgnoreCase)
+                && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase)); 
 
                 return serviceApp;
             });
@@ -60,15 +50,7 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
                 {
                     serviceApp.AccessFailedCount = count;
                     _context.SaveChanges();
-                }
-
-                var serviceApp2 = _serviceApps.Find(m => m.AppId.Equals(
-                    appId, StringComparison.InvariantCultureIgnoreCase)
-                    && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase));
-                if (serviceApp2 != null)
-                {//被修改过，换出缓存
-                    _serviceApps.Remove(serviceApp2);
-                }
+                } 
             });
         }
 
@@ -84,15 +66,7 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
                 {
                     serviceApp.LockoutEnabled = enabled;
                     _context.SaveChanges();
-                }
-
-                var serviceApp2 = _serviceApps.Find(m => m.AppId.Equals(
-                    appId, StringComparison.InvariantCultureIgnoreCase)
-                    && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase));
-                if (serviceApp2 != null)
-                {//被修改过，换出缓存
-                    _serviceApps.Remove(serviceApp2);
-                }
+                } 
             });
         }
 
@@ -108,16 +82,13 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
                 {
                     serviceApp.LockoutEnd = lockoutEnd;
                     _context.SaveChanges();
-                }
-
-                var serviceApp2 = _serviceApps.Find(m => m.AppId.Equals(
-                    appId, StringComparison.InvariantCultureIgnoreCase)
-                    && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase));
-                if (serviceApp2 != null)
-                {//被修改过，换出缓存
-                    _serviceApps.Remove(serviceApp2);
-                }
+                } 
             });
+        }
+
+        public ServiceApp GetServiceAppById(string appId)
+        {
+            return _context.ServiceApps.Find(appId);
         }
     }
 }

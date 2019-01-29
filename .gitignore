@@ -1,1 +1,9 @@
 .vs/
+Celia.io.Core.Auths.Abstractions/obj/
+Celia.io.Core.Auths.DataAccess/obj/
+Celia.io.Core.Auths.DataAccess/bin/
+Celia.io.Core.Auths.Services/bin/
+Celia.io.Core.Auths.Services/obj/
+Celia.io.Core.Auths.WebAPI_Core/bin/
+Celia.io.Core.Auths.WebAPI_Core/obj/
+Celia.io.Core.Auths.Abstractions/bin/

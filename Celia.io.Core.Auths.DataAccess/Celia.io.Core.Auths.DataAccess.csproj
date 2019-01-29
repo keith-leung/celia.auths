@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Celia.io.Core.MicroServices.Utilities" Version="0.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>

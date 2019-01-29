@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 
 namespace Celia.io.Core.Auths.Abstractions
 {
@@ -11,5 +11,6 @@ namespace Celia.io.Core.Auths.Abstractions
         Task UpdateAccessFailedCountAsync(string appId, string appSecret, int count);
         Task UpdateLockoutEnabled(string appId, string appSecret, bool enabled);
         Task UpdateLockoutEnd(string appId, string appSecret, DateTimeOffset? lockoutEnd);
+        ServiceApp GetServiceAppById(string appId);
     }
 }

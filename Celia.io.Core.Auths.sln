@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.Abstrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celia.io.Core.Auths.DataAccess", "Celia.io.Core.Auths.DataAccess\Celia.io.Core.Auths.DataAccess.csproj", "{309B957A-83B5-4F08-8BC4-52466FC417AC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.Services", "Celia.io.Core.Auths.Services\Celia.io.Core.Auths.Services.csproj", "{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.WebAPI_Core", "Celia.io.Core.Auths.WebAPI_Core\Celia.io.Core.Auths.WebAPI_Core.csproj", "{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{309B957A-83B5-4F08-8BC4-52466FC417AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{309B957A-83B5-4F08-8BC4-52466FC417AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{309B957A-83B5-4F08-8BC4-52466FC417AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
