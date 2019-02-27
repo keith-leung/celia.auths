@@ -5,13 +5,17 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.Abstractions", "Celia.io.Core.Auths.Abstractions\Celia.io.Core.Auths.Abstractions.csproj", "{C8D50D31-5F5C-471B-BC6D-232B859D7F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celia.io.Core.Auths.DataAccess", "Celia.io.Core.Auths.DataAccess\Celia.io.Core.Auths.DataAccess.csproj", "{309B957A-83B5-4F08-8BC4-52466FC417AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.DataAccess", "Celia.io.Core.Auths.DataAccess\Celia.io.Core.Auths.DataAccess.csproj", "{309B957A-83B5-4F08-8BC4-52466FC417AC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.Services", "Celia.io.Core.Auths.Services\Celia.io.Core.Auths.Services.csproj", "{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.WebAPI_Core", "Celia.io.Core.Auths.WebAPI_Core\Celia.io.Core.Auths.WebAPI_Core.csproj", "{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.SDK", "Celia.io.Core.Auths.SDK\Celia.io.Core.Auths.SDK.csproj", "{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA7F2884-7F2D-4005-98C1-A47FE4E1A2E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTester1", "ConsoleAppTester1\ConsoleAppTester1.csproj", "{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50} = {AA7F2884-7F2D-4005-98C1-A47FE4E1A2E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {394A8D5D-B281-4F23-ACF8-81CC4FC7B436}

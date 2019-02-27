@@ -21,7 +21,15 @@ namespace Celia.io.Core.Auths.SDK
             this._appSecret = appSecret ?? throw new ArgumentNullException(nameof(appSecret));
             this._authApiHost = authApiHost ?? throw new ArgumentNullException(nameof(authApiHost));
 
-            _httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback = (request, cert, chain, errors) =>
+            {
+                return true;
+                //Console.WriteLine(cert);
+                //return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+
+            _httpClient = new HttpClient(httpClientHandler);
         }
 
         protected async Task<JObject> HttpGetAsync(string path)
@@ -71,7 +79,14 @@ namespace Celia.io.Core.Auths.SDK
         protected async Task<JObject> HttpPostCore(string path, JToken kvRequest)
         {
             Uri uri = new Uri(new Uri(this._authApiHost), path);
-            HttpContent httpContent = new StringContent(kvRequest.ToString(), Encoding.UTF8, "application/json");
+            string contentStr = string.Empty;
+            if (kvRequest != null)
+            {
+                contentStr = kvRequest.ToString();
+            }
+
+            HttpContent httpContent =
+                new StringContent(contentStr, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(uri, httpContent);
             if (response.IsSuccessStatusCode)
             {
@@ -108,7 +123,7 @@ namespace Celia.io.Core.Auths.SDK
             return HttpGetCore(path);
         }
 
-        protected Task<JObject> TokenHttpPostAsync(string accessToken, string path, JObject kvRequest)
+        protected Task<JObject> TokenHttpPostAsync(string accessToken, string path, JToken kvRequest)
         {
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);

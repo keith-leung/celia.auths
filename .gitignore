@@ -9,3 +9,8 @@ Celia.io.Core.Auths.WebAPI_Core/obj/
 Celia.io.Core.Auths.Abstractions/bin/
 Celia.io.Core.Auths.SDK/bin/
 Celia.io.Core.Auths.SDK/obj/
+.idea/
+Celia.io.Core.Auths.WebAPI_Core/logs/
+Celia.io.Core.Auths.WebAPI_Core/Properties/PublishProfiles/
+ConsoleAppTester1/bin/Debug/
+ConsoleAppTester1/obj/

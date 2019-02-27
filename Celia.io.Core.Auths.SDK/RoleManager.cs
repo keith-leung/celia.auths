@@ -1,4 +1,6 @@
 ﻿using Celia.io.Core.Auths.Abstractions;
+using Celia.io.Core.Auths.Abstractions.Exceptions;
+using Celia.io.Core.Auths.Abstractions.ResponseDTOs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,65 +18,26 @@ namespace Celia.io.Core.Auths.SDK
         }
 
         /// <summary>
-        /// 根据一个用户的Id，获取对应的所有角色
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public async Task<IEnumerable<ApplicationRole>> GetRolesByUserIdAsync(string userId)
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// 更新一个角色
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public async Task<ApplicationRole> UpdateRoleAsync(ApplicationRole role)
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// 添加一个角色
-        /// </summary>
-        /// <param name="roleName">角色名</param>
-        /// <returns></returns>
-        public async Task<ApplicationRole> AddRoleAsync(string roleName)
-        {
-            ApplicationRole role = new ApplicationRole()
-            {
-                Name = roleName
-            };
-            JObject response = await this.HttpPostAsync("api/roles/create", JObject.FromObject(role));
-            if (response != null)
-            {
-                return JsonConvert.DeserializeObject<ApplicationRole>(response.ToString());
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// 删除一个角色
-        /// </summary>
-        /// <param name="roleId">角色ID</param>
-        public async Task RemoveRoleAsync(string roleId)
-        {
-        }
-
-        /// <summary>
         /// 根据角色ID查找角色
         /// </summary>
         /// <param name="roleId">角色ID</param>
         /// <returns></returns>
-        public async Task<ApplicationRole> FindRoleByIdAsync(string roleId)
+        public async Task<RoleResponseResult> FindRoleByIdAsync(string token, string roleId)
         {
-            JObject response = await this.HttpGetAsync("api/roles/findbyid?roleId=" + roleId);
-            if (response != null)
+            try
             {
-                return JsonConvert.DeserializeObject<ApplicationRole>(response.ToString());
+                JObject response = await this.TokenHttpGetAsync(token,
+                "api/roles/findbyid?roleId=" + roleId);
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleResponseResult>(response.ToString());
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.FindRoleByIdAsync exception", ex);
+            }
         }
 
         /// <summary>
@@ -82,37 +45,123 @@ namespace Celia.io.Core.Auths.SDK
         /// </summary>
         /// <param name="roleName">角色名</param>
         /// <returns></returns>
-        public async Task<ApplicationRole> FindRoleByNameAsync(string roleName)
+        public async Task<RoleResponseResult> FindRoleByNameAsync(string token, string roleName)
         {
-            JObject response = await this.HttpGetAsync("api/roles/findbyname?roleName=" + roleName);
-            if (response != null)
+            try
             {
-                return JsonConvert.DeserializeObject<ApplicationRole>(response.ToString());
+                JObject response = await this.TokenHttpGetAsync(token,
+                    "api/roles/findbyname?roleName=" + roleName);
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleResponseResult>(response.ToString());
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.FindRoleByNameAsync exception", ex);
+            }
         }
 
         /// <summary>
-        /// 添加权限（Claims）到某个角色
+        /// 根据一个用户的Id，获取对应的所有角色
         /// </summary>
-        /// <param name="claims">权限列表</param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<ApplicationRoleClaim>> AddClaimsToRoleAsync(
-            IEnumerable<ApplicationRoleClaim> claims)
+        public async Task<RolesResponseResult> GetRolesByUserIdAsync(string token, string userId)
         {
-            JArray array = new JArray();
-            foreach (var c in claims)
+            try
             {
-                array.Add(JObject.FromObject(c));
+                JObject response = await this.TokenHttpGetAsync(token,
+                "api/users/getrolesbyuserid?userId=" + userId);
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RolesResponseResult>(response.ToString());
+                }
+                return null;
             }
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.GetRolesByUserIdAsync exception", ex);
+            }
+        }
 
-            JObject response = await this.HttpPostAsync("api/roles/addclaimstorole", array);
-            if (response != null)
+        /// <summary>
+        /// 更新一个角色
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public async Task<RoleResponseResult> UpdateRoleAsync(string token, ApplicationRole role)
+        {
+            try
             {
-                return JsonConvert.DeserializeObject<IEnumerable<ApplicationRoleClaim>>(
-                    response.Value<string>("result"));
+                JObject response = await this.TokenHttpPostAsync(token,
+                "api/roles/update", JObject.FromObject(role));
+
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleResponseResult>(response.ToString());
+                }
+
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.UpdateRoleAsync exception", ex);
+            }
+        }
+
+        /// <summary>
+        /// 添加一个角色
+        /// </summary>
+        /// <param name="roleName">角色名</param>
+        /// <returns></returns>
+        public async Task<RoleResponseResult> AddRoleAsync(string token, string roleName)
+        {
+            try
+            {
+                ApplicationRole role = new ApplicationRole()
+                {
+                    Name = roleName
+                };
+                JObject response = await this.TokenHttpPostAsync(token,
+                    "api/roles/create", JObject.FromObject(role));
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleResponseResult>(response.ToString());
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.AddRoleAsync exception", ex);
+            }
+        }
+
+        /// <summary>
+        /// 删除一个角色
+        /// </summary>
+        /// <param name="roleId">角色ID</param>
+        public async Task<ActionResponseResult> RemoveRoleAsync(string token, string roleId)
+        {
+            try
+            {
+                ApplicationRole role = new ApplicationRole()
+                {
+                    Id = roleId
+                };
+                JObject response = await this.TokenHttpPostAsync(token,
+                    "api/roles/delete", JObject.FromObject(role));
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<ActionResponseResult>(response.ToString());
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.RemoveRoleAsync exception", ex);
+            }
         }
 
         /// <summary>
@@ -122,35 +171,52 @@ namespace Celia.io.Core.Auths.SDK
         /// <param name="claimType">权限类型</param>
         /// <param name="claimValue">权限值</param>
         /// <returns></returns>
-        public Task<ApplicationRoleClaim> AddRoleClaimAsync(string roleId, string claimType, string claimValue)
+        public async Task<RoleClaimResponseResult> AddRoleClaimAsync(string token,
+            string roleId, string claimType, string claimValue)
         {
-            return Task.FromResult<ApplicationRoleClaim>(null);
-
-            //return this.AddRoleClaim(new ApplicationRoleClaim()
-            //{
-            //    //Id = IdGenerator
-            //    RoleId = roleId,
-            //    ClaimType = claimType,
-            //    ClaimValue = claimValue,
-            //});
+            try
+            {
+                JObject response = await this.TokenHttpPostAsync(token,
+                "api/roleclaims/addRoleClaim", JObject.FromObject(
+                    new ApplicationRoleClaim()
+                    {
+                        RoleId = roleId,
+                        ClaimType = claimType,
+                        ClaimValue = claimValue,
+                    }));
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleClaimResponseResult>(response.ToString());
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.AddRoleClaimAsync exception", ex);
+            }
         }
 
         /// <summary>
         /// 删除一个角色的权限
         /// </summary>
         /// <param name="roleClaim"></param>
-        public Task RemoveRoleClaimAsync(ApplicationRoleClaim roleClaim)
+        public async Task<ActionResponseResult> RemoveRoleClaimAsync(string token, ApplicationRoleClaim roleClaim)
         {
-            return null;
-        }
-
-        /// <summary>
-        /// 删除一个角色的多个权限
-        /// </summary>
-        /// <param name="claims"></param>
-        public Task RemoveRoleClaimsAsync(IEnumerable<ApplicationRoleClaim> claims)
-        {
-            return null;
+            try
+            {
+                JObject response = await this.TokenHttpPostAsync(token,
+                    "api/roleclaims/removeRoleClaim", JObject.FromObject(roleClaim));
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<ActionResponseResult>(
+                        response.ToString());
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.RemoveRoleClaimAsync exception", ex);
+            }
         }
 
         /// <summary>
@@ -158,15 +224,24 @@ namespace Celia.io.Core.Auths.SDK
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<ApplicationRoleClaim>> GetClaimsByRoleIdAsync(string roleId)
+        public async Task<RoleClaimsResponseResult> GetClaimsByRoleIdAsync(
+            string token, string roleId)
         {
-            JObject response = await this.HttpGetAsync("api/roles/getclaimsbyroleid?roleId=" + roleId);
-            if (response != null)
+            try
             {
-                return JsonConvert.DeserializeObject<IEnumerable<ApplicationRoleClaim>>(
-                    response.Value<string>("result").ToString());
+                JObject response = await this.TokenHttpGetAsync(token,
+                    "api/roles/getclaimsbyroleid?roleId=" + roleId);
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleClaimsResponseResult>(
+                        response.ToString());
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.GetClaimsByRoleIdAsync exception", ex);
+            }
         }
 
         /// <summary>
@@ -177,13 +252,44 @@ namespace Celia.io.Core.Auths.SDK
         /// <returns></returns>
         public async Task<bool> IsInRoleAsync(string userId, string roleName)
         {
-            JObject response = await this.HttpGetAsync($"api/userroles/isinrole?userId={userId}&roleName={roleName}");
+            JObject response = await this.HttpGetAsync(
+                $"api/userroles/isinrole?userId={userId}&roleName={roleName}");
             if (response != null)
             {
                 return response.Value<bool>("result");
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// 添加权限（Claims）到某个角色
+        /// </summary>
+        /// <param name="claims">权限列表</param>
+        /// <returns></returns>
+        public async Task<RoleClaimsResponseResult> AddClaimsToRoleAsync(
+            string token, IEnumerable<ApplicationRoleClaim> claims)
+        {
+            try
+            {
+                JArray array = new JArray();
+                foreach (var c in claims)
+                {
+                    array.Add(JObject.FromObject(c));
+                }
+
+                JObject response = await this.TokenHttpPostAsync(token, "api/roles/addclaimstorole", array);
+                if (response != null)
+                {
+                    return JsonConvert.DeserializeObject<RoleClaimsResponseResult>(
+                        response.ToString());
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new AuthException("RoleManager.AddClaimsToRoleAsync exception", ex);
+            }
         }
     }
 }

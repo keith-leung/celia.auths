@@ -18,8 +18,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 using NLog.Extensions.Logging;
+using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace Celia.io.Core.Auths.WebAPI_Core
 {
@@ -91,7 +93,10 @@ namespace Celia.io.Core.Auths.WebAPI_Core
             services.AddTransient<UserClaimsPrincipalFactory<
                         ApplicationUser, ApplicationRole>, ApplicationUserClaimsPrincipalFactory>();
 
-            services.AddTransient<IDbConnection>(impl => new MySqlConnection(connectionString));
+            services.AddTransient<IDbConnection>(
+                    impl => new SqlConnection(connectionString)
+                );
+                //impl => new MySqlConnection(connectionString));
 
             SigningCredentials signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(
@@ -104,6 +109,9 @@ namespace Celia.io.Core.Auths.WebAPI_Core
             disconf.CustomConfigs.Add("Audience", Configuration.GetValue<string>("SigningCredentials:Audience"));
 
             services.AddSingleton<DisconfService>(disconf);
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString)
+            );
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseMySql(connectionString));
 

@@ -12,13 +12,14 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
         private readonly ApplicationDbContext _context = null;
         private readonly ILogger logger = null;
 
-        public EfCoreServiceAppRepository(ILogger<EfCoreServiceAppRepository> logger, 
-            ApplicationDbContext context)
+        public EfCoreServiceAppRepository(ILogger<EfCoreServiceAppRepository> logger, ApplicationDbContext context)
         {
             this._context = context ?? throw new ArgumentNullException(
                 nameof(context));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        } 
+        }
+
+        //private List<ServiceApp> _serviceApps = new List<ServiceApp>();
 
         /// <summary>
         /// 不能通过内存实现加速，加速使用缓存是Service层的事情
@@ -29,10 +30,10 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
         public Task<ServiceApp> GetByAppIdAppSecretAsync(string appId, string appSecret)
         {
             return Task.Run<ServiceApp>(() =>
-            { 
+            {
                 var serviceApp = _context.ServiceApps.FirstOrDefault(m => m.AppId.Equals(
                 appId, StringComparison.InvariantCultureIgnoreCase)
-                && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase)); 
+                && m.AppSecret.Equals(appSecret, StringComparison.InvariantCultureIgnoreCase));
 
                 return serviceApp;
             });
@@ -50,7 +51,7 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
                 {
                     serviceApp.AccessFailedCount = count;
                     _context.SaveChanges();
-                } 
+                }
             });
         }
 
@@ -66,7 +67,7 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
                 {
                     serviceApp.LockoutEnabled = enabled;
                     _context.SaveChanges();
-                } 
+                }
             });
         }
 
@@ -82,7 +83,7 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
                 {
                     serviceApp.LockoutEnd = lockoutEnd;
                     _context.SaveChanges();
-                } 
+                }
             });
         }
 
