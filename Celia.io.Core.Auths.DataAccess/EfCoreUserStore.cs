@@ -886,7 +886,13 @@ namespace Celia.io.Core.Auths.DataAccess.EfCore
         #region IDisposable Support
         private bool disposedValue = false; // 要检测冗余调用
 
-        public IQueryable<ApplicationUser> Users => throw new NotImplementedException();
+        public IQueryable<ApplicationUser> Users
+        {
+            get
+            {
+                return _context.Users.AsQueryable<ApplicationUser>();
+            }
+        }
 
         protected virtual void Dispose(bool disposing)
         {

@@ -1,19 +1,18 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Celia.io.Core.Auths.Abstractions;
-using BR.MicroServices.Utilities;
+using Microsoft.EntityFrameworkCore; 
+using Celia.io.Core.Auths.Abstractions; 
 
 namespace Celia.io.Core.Auths.DataAccess.EfCore
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
 
         }
 
-        public DbSet<MigrationVersion> MigrationVersions { get; set; }
+        //public DbSet<MigrationVersion> MigrationVersions { get; set; }
 
         public DbSet<ApplicationUser> Users { get; set; }
 
