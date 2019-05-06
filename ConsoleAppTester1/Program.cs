@@ -21,35 +21,16 @@ namespace ConsoleAppTester1
                 "http://localhost:57966"); 
 
             var t = UpdateUser();
-            t.Wait();
-
-            //var t1 = RefreshToken();
-            //t1.Wait();
-
-            //var t0 = ChangeUserName();
-            //t0.Wait();
+            t.Wait(); 
 
             Console.WriteLine("Over!! ");
             Console.ReadLine();
         }
 
         public static async Task UpdateUser()
-        {
-            //var t1 = userManager.CreateUserAsync(new ApplicationUser()
-            //{
-            //    Email = "Administrator@celia.io",
-            //    UserName = "Administrator",
-            //    PhoneNumber = "+8602038550507",
-            //    Id = "00000000",
-            //});
-
-            //t1.Wait();
-
-            //var t12= userManager.ResetPasswordAsync("00000000", "Admin@celia.io#123456");
-            //t12.Wait();
-            
+        {  
             var adminLogin = await signInManager.LoginByUserNameAsync("Administrator",
-                "Admin@celia.io#123456"); 
+                "Adm2341541363"); 
             
             var t2 = userManager.UpdateUserAsync(adminLogin.AccessToken,
                 new ApplicationUser()
