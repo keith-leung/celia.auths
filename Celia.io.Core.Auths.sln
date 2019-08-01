@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.Abstractions", "Celia.io.Core.Auths.Abstractions\Celia.io.Core.Auths.Abstractions.csproj", "{C8D50D31-5F5C-471B-BC6D-232B859D7F07}"
 EndProject
@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.DataAcc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.Services", "Celia.io.Core.Auths.Services\Celia.io.Core.Auths.Services.csproj", "{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.WebAPI_Core", "Celia.io.Core.Auths.WebAPI_Core\Celia.io.Core.Auths.WebAPI_Core.csproj", "{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celia.io.Core.Auths.SDK", "Celia.io.Core.Auths.SDK\Celia.io.Core.Auths.SDK.csproj", "{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA7F2884-7F2D-4005-98C1-A47FE4E1A2E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTester1", "ConsoleAppTester1\ConsoleAppTester1.csproj", "{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTester1", "ConsoleAppTester1\ConsoleAppTester1.csproj", "{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celia.io.Core.Auths.WebAPI_Core", "Celia.io.Core.Auths.WebAPI_Core\Celia.io.Core.Auths.WebAPI_Core.csproj", "{0BF6A804-BCBE-4A49-B707-2D9A02E6C048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,6 @@ Global
 		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C24EE2E8-7CA3-4B70-B3FA-5070948F04ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{928E52BA-2C1B-4C27-928E-B5A033D7ADEA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{269A9A6F-70F8-49EE-9F06-1AE8945B8F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,6 +43,10 @@ Global
 		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEF5932B-23D6-4EF5-AA5B-5B72617A7F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF6A804-BCBE-4A49-B707-2D9A02E6C048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF6A804-BCBE-4A49-B707-2D9A02E6C048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF6A804-BCBE-4A49-B707-2D9A02E6C048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF6A804-BCBE-4A49-B707-2D9A02E6C048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
